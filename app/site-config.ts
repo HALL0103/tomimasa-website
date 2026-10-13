@@ -32,9 +32,9 @@ export const siteConfig = {
 } as const;
 
 export const workImages = [
-  { src: '/assets/tomimasa/work-1-display.webp', alt: 'グレーの塗り壁門柱を施工した住宅外構' },
-  { src: '/assets/tomimasa/work-2-display.webp', alt: '濃色の塗り壁と格子フェンスを組み合わせた外構' },
-  { src: '/assets/tomimasa/work-3-display.webp', alt: '植栽と塗り壁門柱を組み合わせた住宅外構' },
+  { src: '/assets/tomimasa/work-1-display.webp', smallSrc: '/assets/tomimasa/optimized-v2/work-1-640.webp', mediumSrc: '/assets/tomimasa/optimized-v2/work-1-768.webp', alt: 'グレーの塗り壁門柱を施工した住宅外構' },
+  { src: '/assets/tomimasa/work-2-display.webp', smallSrc: '/assets/tomimasa/optimized-v2/work-2-640.webp', mediumSrc: '/assets/tomimasa/optimized-v2/work-2-768.webp', alt: '濃色の塗り壁と格子フェンスを組み合わせた外構' },
+  { src: '/assets/tomimasa/work-3-display.webp', smallSrc: '/assets/tomimasa/optimized-v2/work-3-640.webp', mediumSrc: '/assets/tomimasa/optimized-v2/work-3-768.webp', alt: '植栽と塗り壁門柱を組み合わせた住宅外構' },
 ] as const;
 
 export const dotconDesigns = [

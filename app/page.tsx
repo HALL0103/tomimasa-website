@@ -9,15 +9,15 @@ export const metadata: Metadata = {
 };
 
 const services = [
-  { title: '左官工事', text: '長年の経験を活かし、住宅まわりの左官工事を丁寧に施工します。', image: siteConfig.images.plaster, alt: '鏝跡を生かした左官仕上げ' },
-  { title: '外構工事', text: '駐車場、アプローチ、玄関まわり、塀・土間など、住まいに合わせた外構工事に対応します。', image: siteConfig.images.exterior, alt: '植栽と塗り壁を組み合わせた住宅外構' },
-  { title: 'Dotcon施工', text: '雨水を地中へ浸透させる、透水性コンクリート舗装「Dotcon」に対応しています。', image: siteConfig.images.dotconCard, alt: 'さまざまな形と色で仕上げたDOTCON舗装' },
+  { title: '左官工事', text: '長年の経験を活かし、住宅まわりの左官工事を丁寧に施工します。', image: siteConfig.images.plaster, smallImage: '/assets/tomimasa/optimized-v2/service-plaster-640.webp', mediumImage: '/assets/tomimasa/optimized-v2/service-plaster-768.webp', alt: '鏝跡を生かした左官仕上げ' },
+  { title: '外構工事', text: '駐車場、アプローチ、玄関まわり、塀・土間など、住まいに合わせた外構工事に対応します。', image: siteConfig.images.exterior, smallImage: '/assets/tomimasa/optimized-v2/service-exterior-640.webp', mediumImage: '/assets/tomimasa/optimized-v2/service-exterior-768.webp', alt: '植栽と塗り壁を組み合わせた住宅外構' },
+  { title: 'Dotcon施工', text: '雨水を地中へ浸透させる、透水性コンクリート舗装「Dotcon」に対応しています。', image: siteConfig.images.dotconCard, smallImage: '/assets/tomimasa/optimized-v2/service-dotcon-640.webp', mediumImage: '/assets/tomimasa/optimized-v2/service-dotcon-768.webp', alt: 'さまざまな形と色で仕上げたDOTCON舗装' },
 ] as const;
 
 export default function HomePage() {
   return <main className="tm-home">
     <section className="tm-hero" id="top">
-      <img src={siteConfig.images.hero} srcSet="/assets/tomimasa/hero-2-mobile.webp 960w, /assets/tomimasa/hero-2-opt.webp 1774w" sizes="100vw" width="1774" height="887" alt="職人が鏝で塗り壁を仕上げる様子" fetchPriority="high" />
+      <img src={siteConfig.images.hero} srcSet="/assets/tomimasa/optimized-v2/home-hero-480.webp 480w, /assets/tomimasa/optimized-v2/home-hero-768.webp 768w, /assets/tomimasa/hero-2-mobile.webp 960w, /assets/tomimasa/optimized-v2/home-hero-1440.webp 1440w, /assets/tomimasa/hero-2-opt.webp 1774w" sizes="100vw" width="1774" height="887" alt="職人が鏝で塗り壁を仕上げる様子" fetchPriority="high" />
       <div className="tm-hero-overlay" />
       <div className="tm-shell tm-hero-inner">
         <h1>左官・外構工事<br />ひとすじ35年</h1>
@@ -31,7 +31,7 @@ export default function HomePage() {
         <header className="tm-section-heading tm-section-heading-line"><p>OUR SERVICES</p><h2>左官から外構まで、職人の手で美しく。</h2></header>
         <div className="tm-service-grid">
           {services.map((service) => <article className="tm-service-card" key={service.title}>
-            <img src={service.image} alt={service.alt} width="900" height="600" loading="lazy" decoding="async" />
+            <img src={service.image} srcSet={`${service.smallImage} 640w, ${service.mediumImage} 768w, ${service.image} 900w`} sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 900px) calc(50vw - 35px), 374px" alt={service.alt} width="900" height="600" loading="lazy" decoding="async" />
             <div><h3>{service.title}</h3><p>{service.text}</p></div>
           </article>)}
         </div>
@@ -39,7 +39,7 @@ export default function HomePage() {
     </section>
 
     <section className="tm-dotcon">
-      <img src={siteConfig.images.dotconHome} srcSet="/assets/tomimasa/home-dotcon-mobile.webp 900w, /assets/tomimasa/home-dotcon.webp 1672w" sizes="100vw" width="1672" height="941" alt="さまざまな模様のDOTCON舗装パターン" loading="lazy" decoding="async" />
+      <img src={siteConfig.images.dotconHome} srcSet="/assets/tomimasa/optimized-v2/home-dotcon-480.webp 480w, /assets/tomimasa/optimized-v2/home-dotcon-768.webp 768w, /assets/tomimasa/home-dotcon-mobile.webp 900w, /assets/tomimasa/optimized-v2/home-dotcon-1440.webp 1440w, /assets/tomimasa/home-dotcon.webp 1672w" sizes="100vw" width="1672" height="941" alt="さまざまな模様のDOTCON舗装パターン" loading="lazy" decoding="async" />
       <div className="tm-dotcon-overlay" />
       <div className="tm-shell tm-dotcon-inner">
         <p className="tm-kicker">PERMEABLE PAVEMENT</p>
@@ -52,7 +52,7 @@ export default function HomePage() {
     </section>
 
     <section className="tm-about" id="about">
-      <img src={siteConfig.images.craft} srcSet="/assets/tomimasa/about-2-mobile.webp 800w, /assets/tomimasa/about-2-opt.webp 1400w" sizes="(max-width: 900px) 100vw, 50vw" width="1400" height="1086" alt="塗り壁と木製門扉、植栽を組み合わせた住宅外構" loading="lazy" decoding="async" />
+      <img src={siteConfig.images.craft} srcSet="/assets/tomimasa/optimized-v2/home-about-640.webp 640w, /assets/tomimasa/about-2-mobile.webp 800w, /assets/tomimasa/about-2-opt.webp 1400w" sizes="(max-width: 900px) 100vw, 55vw" width="1400" height="1086" alt="塗り壁と木製門扉、植栽を組み合わせた住宅外構" loading="lazy" decoding="async" />
       <div className="tm-about-copy">
         <p className="tm-kicker">ABOUT TOMIMASA</p>
         <h2>職人歴35年。<br />一つひとつ、丁寧に。<br />「きれいな仕上がり」を<br />大切にしています。</h2>
@@ -65,7 +65,7 @@ export default function HomePage() {
     <section className="tm-works" id="works">
       <div className="tm-shell">
         <header className="tm-section-heading tm-section-heading-line"><p>WORKS</p><h2>施工例</h2></header>
-        <div className="tm-work-grid">{workImages.map((image) => <figure key={image.src}><img src={image.src} width="900" height="676" alt={image.alt} loading="lazy" decoding="async" /></figure>)}</div>
+        <div className="tm-work-grid">{workImages.map((image) => <figure key={image.src}><img src={image.src} srcSet={`${image.smallSrc} 640w, ${image.mediumSrc} 768w, ${image.src} 900w`} sizes="(max-width: 600px) calc(100vw - 40px), 374px" width="900" height="676" alt={image.alt} loading="lazy" decoding="async" /></figure>)}</div>
         <div className="tm-instagram-row">
           <p>その他の施工事例・最新の施工状況は、<br />Instagramでご紹介しています。</p>
           <a className="tm-button tm-button-dark" href={siteConfig.instagramUrl}><Camera size={17} aria-hidden="true" />Instagramで施工例を見る <span aria-hidden="true">＞</span></a>
