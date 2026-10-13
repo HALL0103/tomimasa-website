@@ -48,7 +48,16 @@ export function ContactForm() {
     if (!siteConfig.interactionsEnabled) return;
     setSubmitting(true);
     setError('');
-    const payload = new URLSearchParams({ 'form-name': 'tomimasa-contact', ...values });
+    const payload = new URLSearchParams({
+      'form-name': 'tomimasa-contact',
+      'お名前': values.name,
+      'ご連絡方法': values.contactMethod === 'phone' ? '電話での連絡を希望する' : 'メールでの連絡を希望する',
+      '電話番号': values.phone,
+      email: values.email,
+      '施工予定地域': values.area,
+      'ご希望の連絡時間帯': values.timeSlot,
+      'お問い合わせ内容': values.message,
+    });
     try {
       const response = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: payload.toString() });
       if (!response.ok) throw new Error('送信に失敗しました。');
@@ -80,20 +89,20 @@ export function ContactForm() {
     <p className="ct-honeypot"><label>この欄は入力しないでください<input name="bot-field" /></label></p>
 
     <label className="ct-form-field"><span>お名前 <em>必須</em></span>
-      <input name="name" value={values.name} onChange={(e) => update('name', e.target.value)} placeholder="例）富正 太郎" autoComplete="name" required />
+      <input name="お名前" value={values.name} onChange={(e) => update('name', e.target.value)} placeholder="例）富正 太郎" autoComplete="name" required />
     </label>
 
     <fieldset className="ct-form-field ct-radio-field">
       <legend>ご連絡方法 <em>必須</em></legend>
-      <label><input type="radio" name="contactMethod" value="phone" checked={phoneRequired} onChange={() => changeContactMethod('phone')} />電話での連絡を希望する</label>
-      <label><input type="radio" name="contactMethod" value="email" checked={!phoneRequired} onChange={() => changeContactMethod('email')} />メールでの連絡を希望する</label>
+      <label><input type="radio" name="ご連絡方法" value="電話での連絡を希望する" checked={phoneRequired} onChange={() => changeContactMethod('phone')} />電話での連絡を希望する</label>
+      <label><input type="radio" name="ご連絡方法" value="メールでの連絡を希望する" checked={!phoneRequired} onChange={() => changeContactMethod('email')} />メールでの連絡を希望する</label>
     </fieldset>
 
     <label className="ct-form-field"><span>電話番号 {phoneRequired && <em>必須</em>} <small>（電話での連絡を希望する場合）</small></span>
-      <input name="phone" type="tel" inputMode="tel" pattern="[0-9０-９+()（）ー\-\s]{8,}" value={values.phone} onChange={(e) => update('phone', e.target.value)} placeholder="例）090-1234-5678" autoComplete="tel" required={phoneRequired} />
+      <input name="電話番号" type="tel" inputMode="tel" pattern="[0-9０-９+()（）ー\-\s]{8,}" value={values.phone} onChange={(e) => update('phone', e.target.value)} placeholder="例）090-1234-5678" autoComplete="tel" required={phoneRequired} />
     </label>
     {phoneRequired && <label className="ct-form-field ct-time-slot-field"><span>ご希望の連絡時間帯 <small>（任意）</small></span>
-      <select name="timeSlot" value={values.timeSlot} onChange={(e) => update('timeSlot', e.target.value)}>
+      <select name="ご希望の連絡時間帯" value={values.timeSlot} onChange={(e) => update('timeSlot', e.target.value)}>
         <option value="指定なし">指定なし</option>
         <option value="午前中">午前中</option>
         <option value="12時〜15時">12時〜15時</option>
@@ -106,10 +115,10 @@ export function ContactForm() {
       <input name="email" type="email" value={values.email} onChange={(e) => update('email', e.target.value)} placeholder="例）taro@example.com" autoComplete="email" required={!phoneRequired} />
     </label>
     <label className="ct-form-field"><span>施工予定地域 <em>必須</em></span>
-      <input name="area" value={values.area} onChange={(e) => update('area', e.target.value)} placeholder="例）和歌山市、海南市 など" autoComplete="address-level2" required />
+      <input name="施工予定地域" value={values.area} onChange={(e) => update('area', e.target.value)} placeholder="例）和歌山市、海南市 など" autoComplete="address-level2" required />
     </label>
     <label className="ct-form-field"><span>お問い合わせ内容 <em>必須</em></span>
-      <textarea name="message" value={values.message} onChange={(e) => update('message', e.target.value)} placeholder="ご相談内容やご質問などをご入力ください。" rows={7} required />
+      <textarea name="お問い合わせ内容" value={values.message} onChange={(e) => update('message', e.target.value)} placeholder="ご相談内容やご質問などをご入力ください。" rows={7} required />
     </label>
     <p className="ct-form-privacy">送信前に<a href="/privacy">プライバシーポリシー</a>をご確認ください。</p>
     <button className="tm-button tm-button-dark ct-submit-button" type="submit"><Mail />確認画面へ進む<span aria-hidden="true">＞</span></button>
