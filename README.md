@@ -41,7 +41,7 @@ npm run build
 
 画面上のフォームにNetlify Forms検出用の属性と `form-name` を設定しています。フォーム名は `tomimasa-contact` です。
 
-現在は `app/site-config.ts` の `interactionsEnabled` が `false` のため、電話発信とフォーム送信は停止した状態です。この設定を変更するまでは実送信されません。
+現在は `app/site-config.ts` の `interactionsEnabled` が `true` のため、確認画面からNetlify Formsへ送信できます。
 
 ## サイト設定
 

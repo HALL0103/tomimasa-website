@@ -1,6 +1,6 @@
 export const siteConfig = {
-  // 意匠確認中は発信・送信を止める。確認完了後の動作テスト時に true へ戻す。
-  interactionsEnabled: false,
+  // Netlify Forms の送信テストを有効にする。
+  interactionsEnabled: true,
   siteUrl: 'https://yamada-sakan.haru-09261225.chatgpt.site',
   businessName: '富正',
   businessNameEn: 'TOMIMASA',
