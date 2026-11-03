@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
+import { phoneTimeOptions } from './form-options';
 
 export function RecruitSection() {
   const [consent, setConsent] = useState(false);
@@ -27,10 +28,10 @@ export function RecruitSection() {
         <div><dt>業務内容</dt><dd>左官工事・外構工事</dd></div>
         <div><dt>就業場所</dt><dd>近畿一円の各工事現場<small>※現場により事業所集合または直行直帰となります。</small></dd></div>
         <div><dt>給与</dt><dd>日給10,000円〜18,000円</dd></div>
-        <div><dt>応募方法</dt><dd>採用応募フォームより</dd></div>
+        <div><dt>応募方法</dt><dd>求人応募フォーム</dd></div>
       </dl>
       <details className="tm-recruit-details">
-        <summary className="tm-button tm-button-outline">求人応募フォームはこちら<span aria-hidden="true" className="tm-recruit-toggle">＋</span></summary>
+        <summary className="tm-button tm-button-outline">求人応募フォームはこちら<span aria-hidden="true" className="tm-recruit-toggle"><span className="tm-recruit-arrow-closed">↓</span><span className="tm-recruit-arrow-open">↑</span></span></summary>
         <div className="tm-recruit-form-panel">
           <h3>求人応募フォーム</h3>
           {status === 'success' ? <div role="status" className="tm-recruit-success"><p>求人応募を受け付けました。</p><p>内容を確認のうえ、ご連絡いたします。</p></div> : <>
@@ -41,14 +42,11 @@ export function RecruitSection() {
               <p hidden><label>この欄は入力しないでください<input name="bot-field" tabIndex={-1} autoComplete="off" /></label></p>
               <div className="tm-recruit-fields">
                 <label><span>お名前 <em>必須</em></span><input name="お名前" autoComplete="name" placeholder="例）山田 太郎" required /></label>
-                <label><span>電話番号 <em>必須</em></span><input name="電話番号" type="tel" autoComplete="tel" placeholder="例）090-1234-5678" required /></label>
-                <label><span>メールアドレス <small>任意</small></span><input name="email" type="email" autoComplete="email" placeholder="例）example@example.com" /></label>
                 <label><span>年齢 <em>必須</em></span><input name="年齢" type="number" min="1" step="1" inputMode="numeric" placeholder="例）30" required /></label>
-                <fieldset className="tm-recruit-wide tm-recruit-experience">
-                  <legend>左官・外構工事の経験 <em>必須</em></legend>
-                  <div>{['未経験', '経験あり', 'その他'].map((experience) => <label key={experience}><input type="radio" name="左官・外構工事の経験" value={experience} required />{experience}</label>)}</div>
-                </fieldset>
-                <label className="tm-recruit-wide"><span>電話対応可能時間 <small>任意</small></span><input name="電話対応可能時間" placeholder="例）9:00〜18:00" /></label>
+                <label><span>電話番号 <em>必須</em></span><input name="電話番号" type="tel" autoComplete="tel" placeholder="例）090-1234-5678" required /></label>
+                <label><span>電話対応可能時間 <em>必須</em></span><select name="電話対応可能時間" defaultValue="" required><option value="" disabled>選択してください</option>{phoneTimeOptions.map((time) => <option key={time} value={time}>{time}</option>)}</select><small>※「いつでも可」は、電話受付時間内で時間帯の指定がない場合です。</small></label>
+                <label><span>左官・外構工事の経験 <em>必須</em></span><select name="左官・外構工事の経験" defaultValue="" required><option value="" disabled>選択してください</option>{['未経験', '経験あり', 'その他'].map((experience) => <option key={experience} value={experience}>{experience}</option>)}</select></label>
+                <label><span>メールアドレス <small>任意</small></span><input name="email" type="email" autoComplete="email" placeholder="例）example@example.com" /></label>
                 <label className="tm-recruit-wide"><span>ご質問・メッセージ <small>任意</small></span><textarea name="ご質問・メッセージ" rows={4} placeholder="ご質問などがあればご記入ください。" /></label>
               </div>
               <div className="tm-recruit-consent"><label><input name="個人情報の取り扱いへの同意" type="checkbox" value="同意する" required checked={consent} onChange={(event) => setConsent(event.target.checked)} />個人情報の取り扱いに同意する <em>必須</em></label><a href="/privacy" target="_blank" rel="noopener noreferrer">個人情報の取り扱いについて（別タブ）</a></div>

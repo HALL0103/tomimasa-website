@@ -3,11 +3,12 @@
 import { FormEvent, useState } from 'react';
 import { Check, ChevronLeft, LoaderCircle, Mail } from 'lucide-react';
 import { siteConfig } from '@/app/site-config';
+import { phoneTimeOptions } from '@/app/form-options';
 
 type ContactMethod = 'phone' | 'email';
 type FormValues = { name: string; contactMethod: ContactMethod; phone: string; email: string; area: string; timeSlot: string; message: string };
 
-const initialValues: FormValues = { name: '', contactMethod: 'phone', phone: '', email: '', area: '', timeSlot: '指定なし', message: '' };
+const initialValues: FormValues = { name: '', contactMethod: 'phone', phone: '', email: '', area: '', timeSlot: '', message: '' };
 const labels: Record<keyof FormValues, string> = {
   name: 'お名前', contactMethod: 'ご連絡方法', phone: '電話番号', email: 'メールアドレス', area: '施工予定地域', timeSlot: 'ご希望の連絡時間帯', message: 'お問い合わせ内容',
 };
@@ -31,7 +32,7 @@ export function ContactForm() {
   const changeContactMethod = (contactMethod: ContactMethod) => setValues((current) => ({
     ...current,
     contactMethod,
-    timeSlot: contactMethod === 'phone' ? (current.timeSlot || '指定なし') : '',
+    timeSlot: contactMethod === 'phone' ? current.timeSlot : '',
   }));
   const phoneRequired = values.contactMethod === 'phone';
   const confirmationKeys = (Object.keys(values) as (keyof FormValues)[]).filter((key) => phoneRequired || key !== 'timeSlot');
@@ -108,13 +109,11 @@ export function ContactForm() {
     </label>
     {phoneRequired && <label className="ct-form-field ct-time-slot-field"><span>ご希望の連絡時間帯 <small>（任意）</small></span>
       <select name="ご希望の連絡時間帯" value={values.timeSlot} onChange={(e) => update('timeSlot', e.target.value)}>
-        <option value="指定なし">指定なし</option>
-        <option value="午前中">午前中</option>
-        <option value="12時〜15時">12時〜15時</option>
-        <option value="15時〜18時">15時〜18時</option>
-        <option value="18時以降">18時以降</option>
+        <option value="" disabled>選択してください</option>
+        {phoneTimeOptions.map((time) => <option key={time} value={time}>{time}</option>)}
       </select>
       <small className="ct-form-note">※ご希望の時間帯に添えない場合があります。</small>
+      <small className="ct-form-note">※「いつでも可」は、電話受付時間内で時間帯の指定がない場合です。</small>
     </label>}
     <label className="ct-form-field"><span>メールアドレス {!phoneRequired && <em>必須</em>} <small>（メールでの連絡を希望する場合）</small></span>
       <input name="email" type="email" value={values.email} onChange={(e) => update('email', e.target.value)} placeholder="例）taro@example.com" autoComplete="email" required={!phoneRequired} />
