@@ -38,7 +38,7 @@ export function RecruitSection() {
             <p className="tm-recruit-form-lead">下記フォームよりご応募・お問い合わせいただけます。</p>
             <form name="recruit-form" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={submit}>
               <input type="hidden" name="form-name" value="recruit-form" />
-              <input type="hidden" name="subject" value="【富正】求人応募" />
+              <input type="hidden" name="subject" value="【ホームページ】求人応募フォーム" />
               <p hidden><label>この欄は入力しないでください<input name="bot-field" tabIndex={-1} autoComplete="off" /></label></p>
               <div className="tm-recruit-fields">
                 <label><span>お名前 <em>必須</em></span><input name="お名前" autoComplete="name" placeholder="例）山田 太郎" required /></label>

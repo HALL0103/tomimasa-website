@@ -53,7 +53,7 @@ export function ContactForm() {
     setError('');
     const payload = new URLSearchParams({
       'form-name': 'tomimasa-contact',
-      subject: '【富正】工事お問い合わせ',
+      subject: '【ホームページ】お問い合わせフォーム',
       '個人情報の取り扱いへの同意': '同意する',
       'お名前': values.name,
       'ご連絡方法': values.contactMethod === 'phone' ? '電話での連絡を希望する' : 'メールでの連絡を希望する',
@@ -91,7 +91,7 @@ export function ContactForm() {
 
   return <><ContactFormHeading /><form className="ct-form-card ct-contact-form" name="tomimasa-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={openConfirmation}>
     <input type="hidden" name="form-name" value="tomimasa-contact" />
-    <input type="hidden" name="subject" value="【富正】工事お問い合わせ" />
+    <input type="hidden" name="subject" value="【ホームページ】お問い合わせフォーム" />
     <p className="ct-honeypot"><label>この欄は入力しないでください<input name="bot-field" /></label></p>
 
     <label className="ct-form-field"><span>お名前 <em>必須</em></span>
