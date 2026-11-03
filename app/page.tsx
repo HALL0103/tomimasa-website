@@ -85,7 +85,7 @@ export default function HomePage() {
           </article>
           <article className="tm-contact-card">
             <img src="/assets/tomimasa/mail-opt.webp" alt="" loading="lazy" />
-            <div className="tm-contact-card-copy"><h3>フォームでのお問い合わせ</h3><p>ご相談・お見積りは<br />お問い合わせフォームからも承っております。<br />24時間いつでもご利用いただけます。</p><a className="tm-button tm-button-dark" href="/contact">お問い合わせフォーム <span aria-hidden="true">＞</span></a></div>
+            <div className="tm-contact-card-copy"><h3>フォームでのお問い合わせ</h3><p>ご相談・お見積りは<br />お問い合わせフォームからも承っております。<br />24時間いつでもご利用いただけます。</p><a className="tm-button tm-button-outline" href="/contact">お問い合わせフォーム <span aria-hidden="true">›</span></a></div>
           </article>
         </div>
         <dl className="tm-contact-facts">

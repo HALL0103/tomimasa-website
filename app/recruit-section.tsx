@@ -44,12 +44,12 @@ export function RecruitSection() {
                 <label><span>お名前 <em>必須</em></span><input name="お名前" autoComplete="name" placeholder="例）山田 太郎" required /></label>
                 <label><span>年齢 <em>必須</em></span><input name="年齢" type="number" min="1" step="1" inputMode="numeric" placeholder="例）30" required /></label>
                 <label><span>電話番号 <em>必須</em></span><input name="電話番号" type="tel" autoComplete="tel" placeholder="例）090-1234-5678" required /></label>
-                <label><span>電話対応可能時間 <em>必須</em></span><select name="電話対応可能時間" defaultValue="" required><option value="" disabled>選択してください</option>{phoneTimeOptions.map((time) => <option key={time} value={time}>{time}</option>)}</select><small>※「いつでも可」は、電話受付時間内で時間帯の指定がない場合です。</small></label>
-                <label><span>左官・外構工事の経験 <em>必須</em></span><select name="左官・外構工事の経験" defaultValue="" required><option value="" disabled>選択してください</option>{['未経験', '経験あり', 'その他'].map((experience) => <option key={experience} value={experience}>{experience}</option>)}</select></label>
+                <label><span>電話対応可能時間 <em>必須</em></span><select name="電話対応可能時間" defaultValue="" required><option value="" disabled>選択してください</option>{phoneTimeOptions.map((time) => <option key={time} value={time}>{time}</option>)}</select><small>※「いつでも可」は、電話受付時間内で時間帯の指定がない場合です。</small><small>※ご希望の時間帯に添えない場合があります。</small></label>
                 <label><span>メールアドレス <small>任意</small></span><input name="email" type="email" autoComplete="email" placeholder="例）example@example.com" /></label>
+                <label><span>左官・外構工事の経験 <em>必須</em></span><select name="左官・外構工事の経験" defaultValue="" required><option value="" disabled>選択してください</option>{['未経験', '経験あり'].map((experience) => <option key={experience} value={experience}>{experience}</option>)}</select></label>
                 <label className="tm-recruit-wide"><span>ご質問・メッセージ <small>任意</small></span><textarea name="ご質問・メッセージ" rows={4} placeholder="ご質問などがあればご記入ください。" /></label>
               </div>
-              <div className="tm-recruit-consent"><label><input name="個人情報の取り扱いへの同意" type="checkbox" value="同意する" required checked={consent} onChange={(event) => setConsent(event.target.checked)} />個人情報の取り扱いに同意する <em>必須</em></label><a href="/privacy" target="_blank" rel="noopener noreferrer">個人情報の取り扱いについて（別タブ）</a></div>
+              <div className="tm-recruit-consent"><label><input name="個人情報の取り扱いへの同意" type="checkbox" value="同意する" required checked={consent} onChange={(event) => setConsent(event.target.checked)} />個人情報の取り扱いに同意する <em>必須</em></label><a href="/privacy" target="_blank" rel="noopener noreferrer">個人情報の取り扱いについて</a></div>
               {status === 'error' && <p role="alert">送信できませんでした。時間をおいて再度お試しください。</p>}
               <button className="tm-button tm-button-outline" type="submit" disabled={!consent || status === 'sending'}>{status === 'sending' ? '送信中…' : '求人応募フォームを送信する'}<span aria-hidden="true">›</span></button>
             </form>

@@ -74,7 +74,7 @@ export function ContactForm() {
 
   if (stage === 'success') return <><ContactFormHeading /><div className="ct-form-card ct-form-success" role="status">
     <span><Check /></span><p className="ct-kicker">THANK YOU</p><h2>お問い合わせを受け付けました</h2>
-    <p>内容を確認のうえ、ご連絡いたします。</p><a className="tm-button tm-button-dark" href="/">ホームへ戻る</a>
+    <p>内容を確認のうえ、ご連絡いたします。</p><a className="tm-button tm-button-outline" href="/">ホームへ戻る</a>
   </div></>;
 
   if (stage === 'confirm') return <><ContactFormHeading confirm /><div className="ct-form-card ct-confirm-card">
@@ -84,8 +84,8 @@ export function ContactForm() {
     </div>)}</dl>
     {error && <p className="ct-form-error" role="alert">{error}</p>}
     <div className="ct-form-actions">
-      <button className="tm-button ct-back-button" type="button" onClick={() => setStage('input')}><ChevronLeft />修正する</button>
-      <button className="tm-button tm-button-dark" type="button" onClick={submit} disabled={submitting}>{submitting ? <LoaderCircle className="ct-spin" /> : <Mail />}送信する<span aria-hidden="true">＞</span></button>
+      <button className="tm-button tm-button-outline ct-back-button" type="button" onClick={() => setStage('input')}><ChevronLeft />修正する</button>
+      <button className="tm-button tm-button-outline" type="button" onClick={submit} disabled={submitting}>{submitting ? <LoaderCircle className="ct-spin" /> : <Mail />}送信する<span aria-hidden="true">›</span></button>
     </div>
   </div></>;
 
@@ -126,6 +126,6 @@ export function ContactForm() {
     </label>
     <p className="ct-form-privacy">送信前に<a href="/privacy">プライバシーポリシー</a>をご確認ください。</p>
     <label className="ct-form-consent"><input type="checkbox" name="個人情報の取り扱いへの同意" value="同意する" required checked={consent} onChange={(event) => setConsent(event.target.checked)} />個人情報の取り扱いに同意する <em>必須</em></label>
-    <button className="tm-button tm-button-dark ct-submit-button" type="submit" disabled={!consent}><Mail />確認画面へ進む<span aria-hidden="true">＞</span></button>
+    <button className="tm-button tm-button-outline ct-submit-button" type="submit" disabled={!consent}><Mail />確認画面へ進む<span aria-hidden="true">›</span></button>
   </form></>;
 }
