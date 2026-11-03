@@ -8,6 +8,7 @@ const navigation = [
   { href: '/', label: 'HOME' },
   { href: '/dotcon', label: 'DOTCON' },
   { href: '/#works', label: '施工例' },
+  { href: '/#recruit', label: '採用情報' },
   { href: '/contact', label: 'お問い合わせ' },
 ] as const;
 

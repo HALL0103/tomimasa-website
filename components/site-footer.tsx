@@ -4,6 +4,7 @@ const links = [
   ['/', 'HOME'],
   ['/dotcon', 'DOTCON'],
   ['/#works', '施工例'],
+  ['/#recruit', '採用情報'],
   ['/contact', 'お問い合わせ'],
 ] as const;
 

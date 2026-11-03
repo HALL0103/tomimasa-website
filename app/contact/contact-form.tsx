@@ -26,6 +26,7 @@ export function ContactForm() {
   const [stage, setStage] = useState<'input' | 'confirm' | 'success'>('input');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [consent, setConsent] = useState(false);
   const update = (key: keyof FormValues, value: string) => setValues((current) => ({ ...current, [key]: value }));
   const changeContactMethod = (contactMethod: ContactMethod) => setValues((current) => ({
     ...current,
@@ -37,19 +38,22 @@ export function ContactForm() {
 
   const openConfirmation = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!consent || !event.currentTarget.reportValidity()) return;
     setError('');
     setStage('confirm');
     requestAnimationFrame(() => document.querySelector('.ct-form-section')?.scrollIntoView({ behavior: 'smooth' }));
   };
 
   const submit = async () => {
-    if (submitting) return;
+    if (submitting || !consent) return;
     // 意匠確認中は確認画面までに留め、外部への送信は行わない。
     if (!siteConfig.interactionsEnabled) return;
     setSubmitting(true);
     setError('');
     const payload = new URLSearchParams({
       'form-name': 'tomimasa-contact',
+      subject: '【富正】工事お問い合わせ',
+      '個人情報の取り扱いへの同意': '同意する',
       'お名前': values.name,
       'ご連絡方法': values.contactMethod === 'phone' ? '電話での連絡を希望する' : 'メールでの連絡を希望する',
       '電話番号': values.phone,
@@ -86,6 +90,7 @@ export function ContactForm() {
 
   return <><ContactFormHeading /><form className="ct-form-card ct-contact-form" name="tomimasa-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={openConfirmation}>
     <input type="hidden" name="form-name" value="tomimasa-contact" />
+    <input type="hidden" name="subject" value="【富正】工事お問い合わせ" />
     <p className="ct-honeypot"><label>この欄は入力しないでください<input name="bot-field" /></label></p>
 
     <label className="ct-form-field"><span>お名前 <em>必須</em></span>
@@ -121,6 +126,7 @@ export function ContactForm() {
       <textarea name="お問い合わせ内容" value={values.message} onChange={(e) => update('message', e.target.value)} placeholder="ご相談内容やご質問などをご入力ください。" rows={7} required />
     </label>
     <p className="ct-form-privacy">送信前に<a href="/privacy">プライバシーポリシー</a>をご確認ください。</p>
-    <button className="tm-button tm-button-dark ct-submit-button" type="submit"><Mail />確認画面へ進む<span aria-hidden="true">＞</span></button>
+    <label className="ct-form-consent"><input type="checkbox" name="個人情報の取り扱いへの同意" value="同意する" required checked={consent} onChange={(event) => setConsent(event.target.checked)} />個人情報の取り扱いに同意する <em>必須</em></label>
+    <button className="tm-button tm-button-dark ct-submit-button" type="submit" disabled={!consent}><Mail />確認画面へ進む<span aria-hidden="true">＞</span></button>
   </form></>;
 }

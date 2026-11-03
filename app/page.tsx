@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { RecruitSection } from './recruit-section';
 import { Camera } from 'lucide-react';
 import { siteConfig, workImages } from './site-config';
 
@@ -67,8 +68,8 @@ export default function HomePage() {
         <header className="tm-section-heading tm-section-heading-line"><p>WORKS</p><h2>施工例</h2></header>
         <div className="tm-work-grid">{workImages.map((image) => <figure key={image.src}><img src={image.src} srcSet={`${image.smallSrc} 640w, ${image.mediumSrc} 768w, ${image.src} 900w`} sizes="(max-width: 600px) calc(100vw - 40px), 374px" width="900" height="676" alt={image.alt} loading="lazy" decoding="async" /></figure>)}</div>
         <div className="tm-instagram-row">
-          <p>その他の施工事例・最新の施工状況は、<br />Instagramでご紹介しています。</p>
-          <a className="tm-button tm-button-dark" href={siteConfig.instagramUrl}><Camera size={17} aria-hidden="true" />Instagramで施工例を見る <span aria-hidden="true">＞</span></a>
+          <p>その他の施工事例・最新の施工状況は、<br />Instagramでご紹介予定です。</p>
+          <button className="tm-button tm-instagram-pending" type="button" disabled><Camera size={17} aria-hidden="true" />Instagram準備中</button><span className="tm-coming-soon">COMING SOON</span>
         </div>
       </div>
     </section>
@@ -92,5 +93,6 @@ export default function HomePage() {
         </dl>
       </div>
     </section>
+    <RecruitSection />
   </main>;
 }
