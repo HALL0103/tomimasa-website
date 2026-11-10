@@ -19,9 +19,9 @@ export default function PrivacyPage() {
         <section><h2>3. 第三者への提供</h2><p>法令に基づく場合、人の生命・身体・財産の保護に必要な場合などを除き、ご本人の同意なく個人情報を第三者へ<span className="copy-nowrap">提供しません。</span></p></section>
         <section><h2>4. 個人情報の管理</h2><p>個人情報への不正アクセス、紛失、漏えい、改ざん等を防ぐため、必要かつ適切な安全管理措置を講じます。</p></section>
         <section><h2>5. 外部サービスの利用</h2><p>お問い合わせの受付にはNetlify Forms等の外部サービスを利用する場合があります。これらのサービスでは、各提供事業者のプライバシーポリシーに従って情報が取り扱われます。</p></section>
-        <section><h2>6. 開示・訂正・削除等</h2><p>ご本人から、当方が保有する個人情報の開示、訂正、利用停止または削除等のお申し出があった場合は、ご本人確認のうえ、法令に従い適切に対応します。</p></section>
+        <section><h2>6. 開示・訂正・削除等</h2><p>ご本人から、当方が保有する個人情報の利用目的の通知、開示、訂正、利用停止または削除等のお申し出があった場合は、法令に従い適切に対応します。</p><p>お申し出は、第8項のお問い合わせ窓口にて受け付けます。必要に応じてご本人確認を行い、具体的なお手続きについてご案内します。</p></section>
         <section><h2>7. 本方針の改定</h2><p>法令やサービス内容の変更等に応じて、本方針を改定することがあります。改定後の内容は本ページに掲載した時点から適用します。</p></section>
-        <section><h2>8. お問い合わせ窓口</h2><p>{siteConfig.businessName}<br />所在地：{siteConfig.postalCode} {siteConfig.address}<br />電話番号：<a href={siteConfig.phoneHref}>{siteConfig.phoneDisplay}</a></p></section>
+        <section><h2>8. お問い合わせ窓口</h2><p>事業者名：{siteConfig.businessName}<br />代表者：{siteConfig.representative}<br />所在地：{siteConfig.postalCode} {siteConfig.address}<br />電話番号：<a href={siteConfig.phoneHref}>{siteConfig.phoneDisplay}</a></p><p>個人情報の取り扱いに関するお問い合わせ、開示・訂正・削除等のお申し出、および苦情は、上記電話番号にて受け付けます。</p></section>
         <p className="legal-date">制定日：2026年10月1日</p>
       </article>
     </main>
