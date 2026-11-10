@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const services = [
   { title: '左官工事', text: '長年の経験を活かし、住宅まわりの左官工事を丁寧に施工します。', image: siteConfig.images.plaster, smallImage: '/assets/tomimasa/optimized-v2/service-plaster-640.webp', mediumImage: '/assets/tomimasa/optimized-v2/service-plaster-768.webp', alt: '鏝跡を生かした左官仕上げ' },
   { title: '外構工事', text: '駐車場、アプローチ、玄関まわり、塀・土間など、住まいに合わせた外構工事に対応します。', image: siteConfig.images.exterior, smallImage: '/assets/tomimasa/optimized-v2/service-exterior-640.webp', mediumImage: '/assets/tomimasa/optimized-v2/service-exterior-768.webp', alt: '植栽と塗り壁を組み合わせた住宅外構' },
-  { title: 'Dotcon施工', text: '雨水を地中へ浸透させる、透水性コンクリート舗装「Dotcon」に対応しています。', image: siteConfig.images.dotconCard, smallImage: '/assets/tomimasa/optimized-v2/service-dotcon-640.webp', mediumImage: '/assets/tomimasa/optimized-v2/service-dotcon-768.webp', alt: 'さまざまな形と色で仕上げたDOTCON舗装' },
+  { title: 'Dotcon施工', text: '透水性を備えたDotconと、車両荷重やデザイン性に配慮したDotcon＋。用途に合わせた舗装工事に対応します。', image: siteConfig.images.dotconCard, smallImage: '/assets/tomimasa/optimized-v2/service-dotcon-640.webp', mediumImage: '/assets/tomimasa/optimized-v2/service-dotcon-768.webp', alt: 'さまざまな形と色で仕上げたDOTCON舗装' },
 ] as const;
 
 export default function HomePage() {
@@ -45,8 +45,9 @@ export default function HomePage() {
         <p className="tm-kicker">PERMEABLE PAVEMENT</p>
         <h2>Dotconとは？</h2>
         <span className="tm-short-line" />
-        <p>Dotcon（ドットコン）/ Dotcon＋（ドットコンプラス）は、雨水を地中へ浸透させる透水性を備えたコンクリート舗装です。</p>
-        <p>水たまりや雨水の流出を抑え、住まいの外まわりを快適に整える選択肢の一つです。</p>
+        <p>Dotcon（ドットコン）は、雨水を地中へ浸透させる透水性コンクリート舗装です。</p>
+        <p>さらに、車両荷重に配慮した構造と、多彩なデザインを備えたDotcon＋（ドットコンプラス）があります。</p>
+        <p>雨の日の水たまりや雨水の流出を抑え、住まいの外まわりを快適に整えます。</p>
         <a className="tm-button tm-button-accent" href="/dotcon">Dotconについて詳しく見る <span aria-hidden="true">＞</span></a>
       </div>
     </section>
