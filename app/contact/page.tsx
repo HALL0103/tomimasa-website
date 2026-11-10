@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'お問い合わせ',
   description: '富正への左官工事、外構工事、DOTCON施工のご相談・お見積りはこちらから。',
   alternates: productionSiteUrl ? { canonical: '/contact' } : undefined,
-  openGraph: { title: 'お問い合わせ｜富正', description: '左官・外構・DOTCON施工のご相談はこちら。' },
+  openGraph: { title: 'お問い合わせ｜富正', description: '左官・外構・DOTCON施工のご相談はこちら。', images: ['/og.png'] },
 };
 
 const examples = [

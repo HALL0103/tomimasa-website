@@ -13,6 +13,32 @@ const labels: Record<keyof FormValues, string> = {
   name: 'お名前', contactMethod: 'ご連絡方法', phone: '電話番号', email: 'メールアドレス', area: '施工予定地域', timeSlot: 'ご希望の連絡時間帯', message: 'お問い合わせ内容',
 };
 
+function validateContact(values: FormValues): string {
+  if (values.contactMethod === 'phone' && !values.phone) {
+    return '電話番号を入力してください（空白のみは入力できません）。';
+  }
+  if (values.phone && (!/[0-9０-９]/.test(values.phone) || !/^[0-9０-９+()（）ー\-\s]{8,}$/.test(values.phone))) {
+    return '電話番号を数字を含む正しい形式で入力してください（例：090-1234-5678）。';
+  }
+  if (values.contactMethod === 'email' && !values.email) {
+    return 'メールアドレスを入力してください（空白のみは入力できません）。';
+  }
+  if (values.email) {
+    const emailInput = document.createElement('input');
+    emailInput.type = 'email';
+    emailInput.value = values.email;
+    if (!emailInput.validity.valid) return 'メールアドレスを正しい形式で入力してください（例：taro@example.com）。';
+  }
+  if (values.contactMethod === 'phone' && !phoneTimeOptions.some((time) => time === values.timeSlot)) {
+    return 'ご希望の連絡時間帯を選択してください。';
+  }
+  return '';
+}
+
+function trimValues(values: FormValues): FormValues {
+  return Object.fromEntries(Object.entries(values).map(([key, value]) => [key, value.trim()])) as FormValues;
+}
+
 function ContactFormHeading({ confirm = false }: { confirm?: boolean }) {
   return <header className="ct-form-heading">
     <p className="ct-kicker">CONTACT FORM</p>
@@ -40,8 +66,14 @@ export function ContactForm() {
 
   const openConfirmation = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!consent || !event.currentTarget.reportValidity()) return;
-    const trimmed = Object.fromEntries(Object.entries(values).map(([key, value]) => [key, value.trim()])) as FormValues;
+    if (!consent) return;
+    const trimmed = trimValues(values);
+    const contactError = validateContact(trimmed);
+    if (contactError) {
+      setError(contactError);
+      return;
+    }
+    if (!event.currentTarget.reportValidity()) return;
     const missing = (['name', 'area', 'message'] as const).find((key) => !trimmed[key]);
     if (missing) {
       setError(labels[missing] + 'を入力してください（空白のみは入力できません）。');
@@ -55,6 +87,12 @@ export function ContactForm() {
 
   const submit = async () => {
     if (submitting || !consent) return;
+    const trimmed = trimValues(values);
+    const contactError = validateContact(trimmed);
+    if (contactError) {
+      setError(contactError);
+      return;
+    }
     // 意匠確認中は確認画面までに留め、外部への送信は行わない。
     if (!siteConfig.interactionsEnabled) return;
     setSubmitting(true);
@@ -64,13 +102,13 @@ export function ContactForm() {
       'bot-field': botField,
       subject: '【ホームページ】お問い合わせフォーム',
       '個人情報の取り扱いへの同意': '同意する',
-      'お名前': values.name,
-      'ご連絡方法': values.contactMethod === 'phone' ? '電話での連絡を希望する' : 'メールでの連絡を希望する',
-      '電話番号': values.phone,
-      email: values.email,
-      '施工予定地域': values.area,
-      'ご希望の連絡時間帯': values.timeSlot,
-      'お問い合わせ内容': values.message,
+      'お名前': trimmed.name,
+      'ご連絡方法': trimmed.contactMethod === 'phone' ? '電話での連絡を希望する' : 'メールでの連絡を希望する',
+      '電話番号': trimmed.phone,
+      email: trimmed.email,
+      '施工予定地域': trimmed.area,
+      'ご希望の連絡時間帯': trimmed.timeSlot,
+      'お問い合わせ内容': trimmed.message,
     });
     try {
       const response = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: payload.toString() });
@@ -114,7 +152,7 @@ export function ContactForm() {
     </fieldset>
 
     <label className="ct-form-field"><span>電話番号 {phoneRequired && <em>必須</em>} <small>（電話での連絡を希望する場合）</small></span>
-      <input name="電話番号" type="tel" inputMode="tel" pattern="[0-9０-９+()（）ー\-\s]{8,}" value={values.phone} onChange={(e) => update('phone', e.target.value)} placeholder="例）090-1234-5678" autoComplete="tel" required={phoneRequired} />
+      <input name="電話番号" type="tel" inputMode="tel" value={values.phone} onChange={(e) => update('phone', e.target.value)} placeholder="例）090-1234-5678" autoComplete="tel" required={phoneRequired} />
     </label>
     {phoneRequired && <label className="ct-form-field ct-time-slot-field"><span>ご希望の連絡時間帯 <em>必須</em></span>
       <select name="ご希望の連絡時間帯" required={phoneRequired} value={values.timeSlot} onChange={(e) => update('timeSlot', e.target.value)}>

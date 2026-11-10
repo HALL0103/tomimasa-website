@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { productionSiteUrl, siteConfig } from '../site-config';
 
-export const metadata: Metadata = { title: 'DOTCON施工', description: '透水・貯留・浸透を一体にした次世代舗装システムDOTCONをご紹介します。', alternates: productionSiteUrl ? { canonical: '/dotcon' } : undefined, openGraph: { title: 'DOTCON施工｜富正', description: '雨の日の水たまりを抑える外構へ。' } };
+export const metadata: Metadata = { title: 'DOTCON施工', description: '透水・貯留・浸透を一体にした次世代舗装システムDOTCONをご紹介します。', alternates: productionSiteUrl ? { canonical: '/dotcon' } : undefined, openGraph: { title: 'DOTCON施工｜富正', description: '雨の日の水たまりを抑える外構へ。', images: ['/og.png'] } };
 
 const concerns = [
   ['/assets/tomimasa/dotcon-final-concern-rain-opt.webp', '雨の日に水たまりができる'], ['/assets/tomimasa/optimized-v2/parking-concern-840.webp', '駐車場がぬかるむ'], ['/assets/tomimasa/dotcon-final-concern-slope-opt.webp', '勾配設計が大変'], ['/assets/tomimasa/dotcon-final-concern-cost-opt.webp', '排水設備にコストがかかる'],
