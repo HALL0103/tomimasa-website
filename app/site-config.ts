@@ -1,7 +1,9 @@
+export const productionSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '');
+
 export const siteConfig = {
   // Netlify Forms の送信テストを有効にする。
   interactionsEnabled: true,
-  siteUrl: 'https://yamada-sakan.haru-09261225.chatgpt.site',
+  siteUrl: productionSiteUrl || 'https://tomimasa-test.netlify.app',
   businessName: '富正',
   businessNameEn: 'TOMIMASA',
   businessSubtitle: '左官・外構工事・Dotcon施工',

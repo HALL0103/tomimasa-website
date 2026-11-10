@@ -565,3 +565,5 @@ body{color:var(--tm-copy)}
 .ct-radio-field input{min-height:0;padding:0;accent-color:var(--tm-chocolate)}
 .ct-form-card .tm-button{background:#fff;color:var(--tm-chocolate);border:1px solid var(--tm-chocolate);min-height:50px;padding:11px 25px;font-size:14px}.ct-form-card .tm-button:focus-visible{outline:2px solid var(--tm-chocolate);outline-offset:4px}
 @media(max-width:600px){.ct-form-card{padding:28px 18px}}
+
+.tm-not-found{min-height:55vh;padding:80px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#F4F0EA;color:#3B2A22;gap:24px}.tm-not-found h1{font-size:clamp(22px,5vw,36px);margin:0}.tm-not-found p{margin:0}

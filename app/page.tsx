@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { Camera } from 'lucide-react';
-import { siteConfig, workImages } from './site-config';
+import { productionSiteUrl, siteConfig, workImages } from './site-config';
 
 export const metadata: Metadata = {
   title: '左官・外構工事ひとすじ35年',
   description: '和歌山市の富正。左官工事、外構・エクステリア工事、DOTCON施工を職人本人が丁寧に対応します。',
-  alternates: { canonical: '/' },
+  alternates: productionSiteUrl ? { canonical: '/' } : undefined,
 };
 
 const services = [

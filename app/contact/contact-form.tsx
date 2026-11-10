@@ -27,6 +27,7 @@ export function ContactForm() {
   const [stage, setStage] = useState<'input' | 'confirm' | 'success'>('input');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [botField, setBotField] = useState('');
   const [consent, setConsent] = useState(false);
   const update = (key: keyof FormValues, value: string) => setValues((current) => ({ ...current, [key]: value }));
   const changeContactMethod = (contactMethod: ContactMethod) => setValues((current) => ({
@@ -40,6 +41,13 @@ export function ContactForm() {
   const openConfirmation = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!consent || !event.currentTarget.reportValidity()) return;
+    const trimmed = Object.fromEntries(Object.entries(values).map(([key, value]) => [key, value.trim()])) as FormValues;
+    const missing = (['name', 'area', 'message'] as const).find((key) => !trimmed[key]);
+    if (missing) {
+      setError(labels[missing] + 'を入力してください（空白のみは入力できません）。');
+      return;
+    }
+    setValues(trimmed);
     setError('');
     setStage('confirm');
     requestAnimationFrame(() => document.querySelector('.ct-form-section')?.scrollIntoView({ behavior: 'smooth' }));
@@ -53,6 +61,7 @@ export function ContactForm() {
     setError('');
     const payload = new URLSearchParams({
       'form-name': 'tomimasa-contact',
+      'bot-field': botField,
       subject: '【ホームページ】お問い合わせフォーム',
       '個人情報の取り扱いへの同意': '同意する',
       'お名前': values.name,
@@ -92,7 +101,7 @@ export function ContactForm() {
   return <><ContactFormHeading /><form className="ct-form-card ct-contact-form" name="tomimasa-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={openConfirmation}>
     <input type="hidden" name="form-name" value="tomimasa-contact" />
     <input type="hidden" name="subject" value="【ホームページ】お問い合わせフォーム" />
-    <p className="ct-honeypot"><label>この欄は入力しないでください<input name="bot-field" /></label></p>
+    <p hidden aria-hidden="true"><label>この欄は入力しないでください<input name="bot-field" tabIndex={-1} autoComplete="off" value={botField} onChange={(event) => setBotField(event.target.value)} /></label></p>
 
     <label className="ct-form-field"><span>お名前 <em>必須</em></span>
       <input name="お名前" value={values.name} onChange={(e) => update('name', e.target.value)} placeholder="例）富正 太郎" autoComplete="name" required />
@@ -109,7 +118,7 @@ export function ContactForm() {
     </label>
     {phoneRequired && <label className="ct-form-field ct-time-slot-field"><span>ご希望の連絡時間帯 <small>（任意）</small></span>
       <select name="ご希望の連絡時間帯" value={values.timeSlot} onChange={(e) => update('timeSlot', e.target.value)}>
-        <option value="" disabled>選択してください</option>
+        <option value="">指定なし</option>
         {phoneTimeOptions.map((time) => <option key={time} value={time}>{time}</option>)}
       </select>
       <small className="ct-form-note">※ご希望の時間帯に添えない場合があります。</small>
@@ -126,6 +135,7 @@ export function ContactForm() {
     </label>
     <p className="ct-form-privacy">送信前に<a href="/privacy">プライバシーポリシー</a>をご確認ください。</p>
     <label className="ct-form-consent"><input type="checkbox" name="個人情報の取り扱いへの同意" value="同意する" required checked={consent} onChange={(event) => setConsent(event.target.checked)} />個人情報の取り扱いに同意する <em>必須</em></label>
+    {error && <p className="ct-form-error" role="alert">{error}</p>}
     <button className="tm-button tm-button-outline ct-submit-button" type="submit" disabled={!consent}><Mail />確認画面へ進む<span aria-hidden="true">›</span></button>
   </form></>;
 }

@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import { siteConfig } from '../site-config';
+import { productionSiteUrl, siteConfig } from '../site-config';
 
 export const metadata: Metadata = {
   title: 'プライバシーポリシー',
   description: '富正の個人情報の取り扱いについてご案内します。',
-  alternates: { canonical: '/privacy' },
+  alternates: productionSiteUrl ? { canonical: '/privacy' } : undefined,
 };
 
 export default function PrivacyPage() {
