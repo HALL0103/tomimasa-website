@@ -13,6 +13,17 @@ const dotconCards = [
   ['/assets/tomimasa/dotcon-final-card-4-opt.webp', '仕上げのバリエーション', ['穴に砂利や植栽などを組み合わせ、さまざまな表情をつくることができます。', 'ドット部分に砂利や土壌を充填することで、芝や草花などを植えることができます。']],
 ] as const;
 const designs = [['/assets/tomimasa/dotcon-final-design-1-opt.webp', '正方形'], ['/assets/tomimasa/dotcon-final-design-2-opt.webp', '長方形'], ['/assets/tomimasa/dotcon-final-design-3-opt.webp', '六角形'], ['/assets/tomimasa/dotcon-final-design-4-opt.webp', '直線']] as const;
+const comparisonImageSizes = '(max-width: 600px) calc(100vw - 54px), (max-width: 900px) calc((100vw - 115px) / 2), min(272px, calc((100vw - 141px) / 4))';
+
+function comparisonImageSources(slug: string, phase: 'before' | 'after') {
+  const base = `/assets/tomimasa/dotcon-plus-comparisons/${slug}-${phase}`;
+  return {
+    src: `${base}-720.webp`,
+    srcSet: [360, 720, 1200].map((width) => `${base}-${width}.webp ${width}w`).join(', '),
+    sizes: comparisonImageSizes,
+  };
+}
+
 const comparisons = [
   { label: '正方形', slug: 'square', before: [1506, 1045], after: [1473, 1068] },
   { label: '長方形', slug: 'rectangle', before: [1446, 1087], after: [1446, 1087] },
@@ -45,9 +56,9 @@ export default function DotconPage() {
       <div className="df-work-grid df-comparison-grid">
         {comparisons.map(({ label, slug, before, after }) => <figure key={slug}>
           <figcaption>{label}</figcaption>
-          <img src={`/assets/tomimasa/dotcon-plus-comparisons/${slug}-before.png`} width={before[0]} height={before[1]} alt={`${label}の施工前イメージ`} loading="lazy" decoding="async" />
+          <img {...comparisonImageSources(slug, 'before')} width={before[0]} height={before[1]} alt={`${label}の施工前イメージ`} loading="lazy" decoding="async" />
           <span className="df-comparison-arrow" aria-hidden="true">↓</span>
-          <img src={`/assets/tomimasa/dotcon-plus-comparisons/${slug}-after.png`} width={after[0]} height={after[1]} alt={`${label}の施工後イメージ`} loading="lazy" decoding="async" />
+          <img {...comparisonImageSources(slug, 'after')} width={after[0]} height={after[1]} alt={`${label}の施工後イメージ`} loading="lazy" decoding="async" />
         </figure>)}
       </div></div>
     </div></section>
