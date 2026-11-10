@@ -116,9 +116,9 @@ export function ContactForm() {
     <label className="ct-form-field"><span>電話番号 {phoneRequired && <em>必須</em>} <small>（電話での連絡を希望する場合）</small></span>
       <input name="電話番号" type="tel" inputMode="tel" pattern="[0-9０-９+()（）ー\-\s]{8,}" value={values.phone} onChange={(e) => update('phone', e.target.value)} placeholder="例）090-1234-5678" autoComplete="tel" required={phoneRequired} />
     </label>
-    {phoneRequired && <label className="ct-form-field ct-time-slot-field"><span>ご希望の連絡時間帯 <small>（任意）</small></span>
-      <select name="ご希望の連絡時間帯" value={values.timeSlot} onChange={(e) => update('timeSlot', e.target.value)}>
-        <option value="">指定なし</option>
+    {phoneRequired && <label className="ct-form-field ct-time-slot-field"><span>ご希望の連絡時間帯 <em>必須</em></span>
+      <select name="ご希望の連絡時間帯" required={phoneRequired} value={values.timeSlot} onChange={(e) => update('timeSlot', e.target.value)}>
+        <option value="">選択してください</option>
         {phoneTimeOptions.map((time) => <option key={time} value={time}>{time}</option>)}
       </select>
       <small className="ct-form-note">※ご希望の時間帯に添えない場合があります。</small>
@@ -133,7 +133,7 @@ export function ContactForm() {
     <label className="ct-form-field"><span>お問い合わせ内容 <em>必須</em></span>
       <textarea name="お問い合わせ内容" value={values.message} onChange={(e) => update('message', e.target.value)} placeholder="ご相談内容やご質問などをご入力ください。" rows={7} required />
     </label>
-    <p className="ct-form-privacy">送信前に<a href="/privacy">プライバシーポリシー</a>をご確認ください。</p>
+    <p className="ct-form-privacy">送信前に<a href="/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>をご確認ください。</p>
     <label className="ct-form-consent"><input type="checkbox" name="個人情報の取り扱いへの同意" value="同意する" required checked={consent} onChange={(event) => setConsent(event.target.checked)} />個人情報の取り扱いに同意する <em>必須</em></label>
     {error && <p className="ct-form-error" role="alert">{error}</p>}
     <button className="tm-button tm-button-outline ct-submit-button" type="submit" disabled={!consent}><Mail />確認画面へ進む<span aria-hidden="true">›</span></button>
