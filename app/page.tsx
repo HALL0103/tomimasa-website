@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { RecruitSection } from './recruit-section';
 import { Camera } from 'lucide-react';
 import { siteConfig, workImages } from './site-config';
 
@@ -93,6 +92,5 @@ export default function HomePage() {
         </dl>
       </div>
     </section>
-    <RecruitSection />
   </main>;
 }
